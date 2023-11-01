@@ -1,0 +1,79 @@
+"use strict";
+
+(function ($) {
+  Drupal.behaviors.cncSlider = {
+    attach: function attach(context, settings) {
+      if ($(".flexslider", ".view-questionnaire,.view-quiz").length) {
+        $('.flexslider', ".view-questionnaire,.view-quiz").flexslider({
+          slideshow: false,
+          after: function after(slider) {
+            slider.resize();
+          }
+        });
+      } //var breakpoints = [1000,900,800,700,600,500,400,300,200,100];
+
+
+      var breakpoints = [200, 150, 100, 50, 25];
+      var common = {
+        min: 25,
+        max: 205,
+        step: 1,
+        value: 25
+      }; // only allow for browsers > ie8
+
+      if (Modernizr.borderradius && $("#slider_a").length) {
+        var x = $("#slider_a input").slider({
+          min: common.min,
+          max: common.max,
+          step: common.step,
+          value: common.value,
+          selection: 'after',
+          orientation: 'horizontal',
+          formater: function formater(value) {
+            return '$' + value + '<em>per week</em>';
+          },
+          touchCapable: true
+        }).on('slide', function (ev) {
+          revealOptions(ev.value);
+        });
+        var y = $("#slider_b input").slider({
+          min: common.min,
+          max: common.max,
+          step: common.step,
+          value: common.value,
+          selection: 'after',
+          orientation: 'vertical',
+          reversed: false,
+          formater: function formater(value) {
+            return '$' + value + '<em>per week</em>';
+          }
+        }).on('slide', function (ev) {
+          revealOptions(ev.value);
+        });
+      }
+      /* Reveal the things you could buy at [val] weekly, monthly, yearly */
+
+
+      function revealOptions(val) {
+        $("li").removeClass("active");
+
+        for (var i in breakpoints) {
+          if (val >= breakpoints[i]) {
+            $('li[data-cost="' + breakpoints[i] + '"]').addClass('active');
+            break;
+          }
+        }
+      } // IE fallback
+
+
+      $("button", "#slider_fallback").click(function () {
+        var amount = $(this).data("value"); //alert(amount);
+
+        $("li", ".rewards").hide();
+        $("li[data-cost=" + amount + "]", ".rewards").show();
+        $("button", "#slider_fallback").removeClass("active");
+        $(this).addClass("active");
+      });
+    }
+  };
+})(jQuery);

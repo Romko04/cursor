@@ -1,0 +1,185 @@
+"use strict";
+
+(function ($) {
+  Drupal.behaviors.cncApp = {
+    attach: function attach(context, settings) {
+      // Track when users click the chat button.
+      $('a.chat-button', context).once('chat-button', function () {
+        $('a.chat-button').on("click", function () {
+          dataLayer.push({
+            'event': 'VirtualPageviewChat',
+            'virtualPageURLChat': '/VirtualPageChat/start'
+          });
+        });
+      }); // when users click this paragraph (as purported in analytics) guide them to the block underneath
+
+      $("> *", ".guide-user-down-page").on('click', function (evt) {
+        var next_block = $(this).parents('.block + .block');
+
+        if (next_block.length) {
+          $('html,body').animate({
+            scrollTop: next_block.offset().top
+          }, 'slow');
+        }
+
+        evt.preventDefault();
+      });
+
+      if (Function('/*@cc_on return document.documentMode===10@*/')()) {
+        $("html").addClass("ie10");
+      } // TODO: Refactor this in a sane way!
+
+
+      if ($('.page-node-31').length > 0) {
+        if ($('.views-row-2 .field--name-title h2 a').text() == 'Keeping busy') {
+          $('.views-row-2 .field--name-title h2 a').attr('href', '/activities-overview');
+          $('.views-row-2 .field--name-field-teaser-image a').attr('href', '/activities-overview');
+        }
+      } // fancy dropdown menus
+      //$(".form-select",".webform-client-form").selectbox();
+
+
+      var block_search = $(".global-search");
+      $("button", ".search-trigger").on('click', function () {
+        $(this).toggleClass("active");
+        block_search.toggleClass("opened");
+        $(".form-text", block_search).focus();
+        $(this).hasClass("active") ? $(".form-text", block_search).focus() : $(".form-text", block_search).blur();
+      });
+      $("button", ".mobile-nav-trigger").on('click', function () {
+        $(this).toggleClass("active"); //block_search.toggleClass("opened");
+        // variable height, so must js slide vs CSS animation        
+
+        $(this).hasClass("active") ? $(".mobile-nav .menu").slideDown('fast') : $(".mobile-nav .menu").slideUp('fast');
+      });
+      /* Mobile navigation + buttons */
+
+      $("li.has-children > a,li.expanded > a", ".mobile-nav").each(function () {
+        var span = $('<span class="expand">+</span>');
+
+        if ($(this).hasClass("active-trail")) {
+          span.addClass("active");
+          $(this).parent().addClass('expand');
+        }
+
+        $(this).append(span);
+      });
+      $("span.expand", ".mobile-nav").on('click', function (e) {
+        $(this).toggleClass('active');
+        $(this).parent().parent().toggleClass('expand').removeClass("active-trail");
+        e.preventDefault();
+      });
+      var landing_page_teaser_view = $(".view-landing-page-teaser-list");
+      var quotes = $(".group-quote", landing_page_teaser_view);
+
+      function verticalAlign(quote) {
+        quotes.each(function () {
+          var h = $(this).outerHeight();
+          $(this).css("margin-top", h / 2 * -1 + 'px');
+        });
+      }
+
+      var desktop_breakpoint = 945;
+      var tablet_breakpoint = 760;
+      /*quotes.each(function(){
+        $(this).hide(); // display none
+        
+        if($(this).parent().hasClass('view-mode-teaser_image_left')){
+          $(this).addClass('animated fadeInRight');
+        }
+        else {
+          $(this).addClass('animated fadeInLeft');
+        }
+        
+        $(this).show();        
+      });*/
+
+      var isMobile = $(window).width() >= desktop_breakpoint ? false : true; // when elements become visible, animate them
+
+      var animated_divs = [$('.figure strong', context), $('.infographic-left', context), $('.infographic-right', context)];
+      var page_contains_animations = false;
+      $.each(animated_divs, function (e) {
+        $(this).appear();
+        page_contains_animations = true;
+      });
+
+      if (page_contains_animations) {
+        $("html,body").trigger("scroll");
+      }
+
+      animated_divs[0].on('appear', function (event, $all_appeared_elements) {
+        $all_appeared_elements.addClass('animated fadeInDown');
+      });
+      animated_divs[1].on('appear', function (event, $all_appeared_elements) {
+        $all_appeared_elements.addClass('fadeInLeft animated');
+      });
+      animated_divs[2].on('appear', function (event, $all_appeared_elements) {
+        $all_appeared_elements.addClass('fadeInRight animated');
+      });
+      /* .interactive-banner functionality */
+
+      $("li", ".interactive-banner .block__content").hover(function () {
+        $("li:not(this)", ".interactive-banner .block__content").removeClass('opened').addClass('closed');
+        $(this).addClass('opened').removeClass('closed');
+      }, function () {
+        $(this).addClass('closed').removeClass('opened');
+        $("li:not(this)", ".interactive-banner .block__content").removeClass('closed');
+      });
+
+      if (Modernizr.mq('only screen and (min-width: 700px)')) {
+        var homepage_banner_panels = $("li", ".interactive-banner .block__content");
+        homepage_banner_panels.hide();
+        window.setTimeout(function () {
+          homepage_banner_panels.fadeIn('slow');
+        }, 500);
+      }
+
+      $(".node__banner > img", context).one('load', function () {
+        $(this).addClass('js-loaded');
+      }).each(function () {
+        if (this.complete) {
+          $(this).load();
+        }
+      });
+      $(".js-copy-link").on('click', function () {});
+    }
+  };
+  Drupal.behaviors.copyToClipboard = {
+    attach: function attach() {
+      $(".js-copy-link").on('click', function (event) {
+        Drupal.behaviors.copyToClipboard.action(event.target.dataset.copy);
+        $(event.target).text('Copied').addClass('is-copied');
+      });
+    },
+    action: function action(text) {
+      var $temp = $("<input>");
+      $("body").append($temp);
+      $temp.val(text).select();
+      document.execCommand("copy");
+      $temp.remove();
+    }
+  };
+  Drupal.behaviors.detailsTag = {
+    attach: function attach() {
+      $("summary", ".no-smil").on('click', function () {
+        var details = $(this).parent('details');
+        var isOpen = details.attr('open') === 'open' ? true : false;
+        details.attr({
+          open: !isOpen
+        });
+      });
+    }
+  };
+  Drupal.behaviors.socialShareButtons = {
+    attach: function attach(context) {
+      $(".js-share-facebook", context).on('click', function (event) {
+        window.open($(event.target).attr('href'), 'fbShareWindow', 'height=450, width=700, top=' + ($(window).height() / 2 - 175) + ', left=' + ($(window).width() / 2 - 125) + ', toolbar=0, location=0, menubar=0, directories=0, scrollbars=0');
+        event.preventDefault();
+      });
+      $(".js-share-twitter", context).on('click', function (event) {
+        window.open($(event.target).attr('href'), 'fbShareWindow', 'left=0,top=0,width=550,height=450,personalbar=0,toolbar=0,scrollbars=0,resizable=0');
+        event.preventDefault();
+      });
+    }
+  };
+})(jQuery);

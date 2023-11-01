@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 164">
+  <defs>
+    <style>
+      .cls-1{fill:#e15f46;}.cls-2{fill:#b44c3e;}.cls-3{fill:#f3715a;}.cls-4{fill:#fff;stroke:#b44c3e;stroke-miterlimit:10;}.cls-5{fill:none;}
+    </style>
+  </defs>
+  <g id="Header">
+    <rect class="cls-1" x="28.46" y="26.15" width="55.38" height="80.34" rx="8.14" ry="8.14" transform="rotate(-6.97 56.12 66.294)"/>
+    <rect class="cls-2" x="21.79" y="45.29" width="68.72" height="42.05" rx="2.65" ry="2.65" transform="rotate(83.03 56.145 66.318)"/>
+    <rect class="cls-3" x="28.85" y="52.71" width="54.59" height="27.21" rx="2.65" ry="2.65" transform="rotate(83.03 56.145 66.318)"/>
+    <rect class="cls-4" x="58.5" y="56.67" width="55.38" height="80.34" rx="8.14" ry="8.14" transform="rotate(10.28 86.21 96.863)"/>
+    <path class="cls-2" d="M97.39 93.89l-8.45-12.2-12.2 8.45c-10.08 7 3.46 17.78 9.07 8.78 2.09 10.4 18.57 5.08 11.58-5.03z"/>
+    <path class="cls-2" d="M85.77 103.79l1.09-6-.38-.55-1.25.26-1.09 6c-.13.74-5.2 4.65-5.2 4.65L89 110s-3.36-5.47-3.23-6.21zm-6.49-37.3L76.88 63l-3.47 2.4c-2.87 2 1 5.06 2.58 2.5.59 2.98 5.28 1.46 3.29-1.41z"/>
+    <path class="cls-2" d="M76 69.31l.31-1.71-.11-.16-.35.07-.31 1.71A10 10 0 0 1 74 70.55l2.86.52a10 10 0 0 1-.86-1.76zm26 58.86l-2.41-3.49-3.49 2.41c-2.88 2 1 5.08 2.59 2.51.61 2.97 5.31 1.4 3.31-1.43z"/>
+    <path class="cls-2" d="M98.69 131l.31-1.72-.11-.16-.36.07-.31 1.72a10.08 10.08 0 0 1-1.49 1.33l2.87.52a10.08 10.08 0 0 1-.91-1.76z"/>
+  </g>
+  <path class="cls-5" d="M0 0h144v164H0z" id="Layer_4" data-name="Layer 4"/>
+</svg>

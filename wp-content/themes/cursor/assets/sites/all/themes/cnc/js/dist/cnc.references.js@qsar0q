@@ -1,0 +1,28 @@
+"use strict";
+
+(function ($) {
+  Drupal.behaviors.cncReferences = {
+    attach: function attach(context, settings) {
+      var References = $(".node__references > ol", context);
+
+      if (References.length) {
+        $("li", References).each(function () {
+          var i = $(this).index() + 1;
+          $(".node", context).find('sup:contains("' + i + '")').attr('data-link', 'node-reference--' + i);
+          $(this).attr('id', 'node-reference--' + i);
+        });
+      }
+
+      $("sup[data-link]", context).on('click', function (evt) {
+        var ref = $(this).attr('data-link');
+        var id = $("#" + ref, References);
+
+        if (id.length) {
+          // clean up URL
+          var url = window.location.href.split('#');
+          window.location = url[0] + "#" + ref;
+        }
+      });
+    }
+  };
+})(jQuery);

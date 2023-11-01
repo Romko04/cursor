@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 164">
+  <defs>
+    <style>
+      .cls-1{fill:none;}.cls-2{fill:#b44c3e;}.cls-3{fill:#f3715a;}.cls-4{fill:#fac6bd;}.cls-5{fill:#e15f46;}.cls-6{clip-path:url(#clip-path);}.cls-7{fill:#f9b8ac;}.cls-8{fill:#fbd5cd;}
+    </style>
+    <clipPath id="clip-path">
+      <circle class="cls-1" cx="131.46" cy="37.94" r="7.52"/>
+    </clipPath>
+  </defs>
+  <g id="OVER">
+    <rect class="cls-2" x="116.47" y="76.55" width="11.55" height="24.44" rx="3.14" ry="3.14"/>
+    <rect class="cls-3" x="11.01" y="58.7" width="98.64" height="52.88" rx="2.21" ry="2.21"/>
+    <path class="cls-4" d="M129.48 36.38h-.77v58.38h.77c3 0 5-3.62 5-6.64V40.38c.01-3.01-1.99-4-5-4z"/>
+    <circle class="cls-3" cx="131.46" cy="37.94" r="7.52"/>
+    <rect class="cls-2" x="17.25" y="64.28" width="24.69" height="41.24" rx=".84" ry=".84"/>
+    <rect class="cls-2" x="48.5" y="64.28" width="24.69" height="41.24" rx=".84" ry=".84"/>
+    <rect class="cls-2" x="79.75" y="64.28" width="24.69" height="41.24" rx=".84" ry=".84"/>
+    <circle class="cls-5" cx="60.68" cy="90.68" r="1.99"/>
+    <path class="cls-3" d="M65.31 85.24c-.32-3.35-.2-5.18-.78-5.59a7 7 0 0 0-2.31-.8 1.44 1.44 0 0 0-2.88 0 7 7 0 0 0-2.31.8c-.58.42-.46 2.25-.79 5.59a3.56 3.56 0 0 1-3.47 3.26V90a39.55 39.55 0 0 0 7.74 1.19h.55c2.16 0 7.71-.85 7.71-1.19v-1.5a3.56 3.56 0 0 1-3.46-3.26z"/>
+    <path class="cls-6 cls-5" d="M130.93 30.15h8.44v16h-8.44z"/>
+    <path class="cls-7" d="M91.5 77.59l2.14 4.32 4.76.69-3.45 3.37.82 4.75-4.27-2.25-4.26 2.25.81-4.75-3.45-3.37 4.77-.69 2.13-4.32z"/>
+    <path class="cls-8" d="M33.48 79.88h-3.6l2.73 3.71.87-3.71zM29.4 91.6l3.03-7.41h-6.06l3.03 7.41zm-3.2-8.01l2.73-3.71h-3.6l.87 3.71zm.34.21h5.72l-2.86-3.89-2.86 3.89zm-.7 0l-.89-3.82-3.41 3.82h4.3zm8.04-3.92l-.91 3.92h4.45l-3.49-3.92h-.05zm-1.02 4.31l-3.24 7.94 7.86-7.94h-4.62zm-6.91 0h-4.47l7.6 7.68-3.13-7.68z"/>
+  </g>
+  <path class="cls-1" d="M0 0h144v164H0z" id="Layer_4" data-name="Layer 4"/>
+</svg>

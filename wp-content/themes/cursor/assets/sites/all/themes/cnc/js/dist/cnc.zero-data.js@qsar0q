@@ -1,0 +1,74 @@
+"use strict";
+
+(function ($) {
+  Drupal.behaviors.cncZeroData = {
+    attach: function attach(context, settings) {
+      var youtubeIframes = $("iframe[src*=youtube]");
+
+      if (youtubeIframes.length === 0) {
+        return;
+      } // can user connect to internet (has data)
+      // can connect?
+
+
+      $.ajax({
+        url: 'https://api.geonet.org.nz/news/geonet',
+        // publicly accessible API, but won't work if no data
+        //url: 'https://www.hpa.org.nz',
+        crossDomain: true,
+        timeout: 3000,
+        success: function success(response) {//parent.css('opacity',1);
+        }
+      }, 'json').fail(function (response) {
+        youtubeIframes.each(function () {
+          var self = $(this);
+          self.hide();
+          $('<div />', {
+            'class': 'iframePlaceholder',
+            'html': '<a href="/no-mobile-credit" target="_blank">You need data to view this video.</a>'
+          }).appendTo(self.parent());
+        });
+        Drupal.behaviors.cncZeroData.addCustomGA();
+      });
+      youtubeIframes.each(function () {
+        var iframe = $(this);
+        var parent = iframe.parent();
+        var videoId = iframe.attr('src').split('https://www.youtube.com/embed/');
+        videoId = videoId[1].split('?')[0]; // get fallback image
+
+        $.ajax({
+          url: "/get-youtube-image/".concat(videoId),
+          success: function success(response) {
+            parent.css({
+              'background-image': "url(\"".concat(response.imageEncoded, "\")"),
+              'background-repeat': 'no-repeat',
+              'background-size': 'cover',
+              'background-position': 'center',
+              'opacity': 1
+            });
+          }
+        }, 'json');
+      });
+    },
+    addCustomGA: function addCustomGA() {
+      var s = document.createElement('script');
+      s.setAttribute('src', "//freeproxy.hpa.org.nz/analytics-edited-hpa.js");
+
+      s.onload = function () {
+        console.log("Backup GA //freeproxy.hpa.org.nz/analytics-edited-hpa.js loaded...");
+
+        (function (i, s, o, r) {
+          i['GoogleAnalyticsObject'] = r;
+          i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments);
+          }, i[r].l = 1 * new Date();
+        })(window, document, 'script', 'ga');
+
+        ga('create', 'UA-5952302-7', 'auto', 'HPA');
+        ga('HPA.send', 'pageview');
+      };
+
+      document.body.appendChild(s);
+    }
+  };
+})(jQuery);

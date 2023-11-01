@@ -1,0 +1,41 @@
+"use strict";
+
+(function ($) {
+  Drupal.behaviors.cncYoutube = {
+    attach: function attach(context, settings) {
+      var $_triggers = $(".js-youtube-modal", context);
+
+      if ($_triggers.length) {
+        var $_modal = $('<div />', {
+          'class': 'c-modal js-modal'
+        }).appendTo('body');
+        $("<button />", {
+          'class': 'js-close',
+          'text': 'Close'
+        }).appendTo($_modal).on('click', function (evt) {
+          $('body').removeClass('js-show-modal');
+          $_iframe.attr('src', null);
+        });
+        var $_wrapper = $('<div />', {
+          'class': 'c-modal__iframe'
+        }).appendTo($_modal);
+        var $_iframe = $('<iframe />', {
+          //width: 560,
+          //height: 315,
+          frameborder: 0,
+          allowfullscreen: true,
+          src: null
+        }).appendTo($_wrapper);
+      }
+
+      $_triggers.on('click', function (evt) {
+        var yid = $(this).attr("href").split('/').length >= 4 ? $(this).attr("href").split('/')[3] : null; // build embed url
+        //<iframe width="560" height="315" src="https://www.youtube.com/embed/ErqkZ5_A-Fk" frameborder="0" allowfullscreen></iframe>
+
+        $_iframe.attr('src', 'https://www.youtube.com/embed/' + yid);
+        $('body').toggleClass('js-show-modal');
+        evt.preventDefault();
+      });
+    }
+  };
+})(jQuery);

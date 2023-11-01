@@ -1,0 +1,27 @@
+"use strict";
+
+(function ($) {
+  Drupal.behaviors.cncGA = {
+    attach: function attach(context, settings) {
+      // Add some Google tracking to the contact form
+      if ($('#webform-client-form-241').length > 0) {
+        $('#edit-submitted-your-name').focus(function () {
+          triggerGoogleVirtualPage('name');
+        });
+        $('#edit-submitted-your-email-address').focus(function () {
+          triggerGoogleVirtualPage('mail');
+        });
+        $('#edit-submitted-your-question-or-comment').focus(function () {
+          triggerGoogleVirtualPage('comment');
+        });
+        $('#edit-submit').click(function () {
+          triggerGoogleVirtualPage('sendContactUs');
+        });
+      }
+
+      function triggerGoogleVirtualPage(field) {
+        ga('send', 'pageview', '/virtualPageContactUs/' + field);
+      }
+    }
+  };
+})(jQuery);

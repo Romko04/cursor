@@ -1,0 +1,54 @@
+(function($) {
+  $.fn.sparkscheckbox = function(options) {
+    var settings = $.extend({
+      className : 'checkbox',
+      checkedOnload : false,
+      onClick : null
+    }, options);
+    
+    return this.each(function() {
+      var btn = $('<a href="#" class="' + settings.className + '" data-match="' + $(this).attr('id') + '">&#10003;</a>');
+      
+      btn.click(function() {
+        // Prepare variables.
+        var id = $(this).attr("data-match");
+        var state = $(this).hasClass('checked');
+        var checkbox = $("#" + id);
+
+        // if radiobox, check other radio boxes with same name, turn them off
+        if (checkbox.attr("type") == "radio") {
+          var other_radios = $("input[name*='" + checkbox.attr("name") + "']");
+          if (other_radios) {
+            other_radios.each(function(){
+              $("a[data-match*=" + $(this).attr('id') + "]").removeClass("checked");
+              $(this).removeAttr("checked");
+              $(this).trigger('change');
+            });
+          }
+        }
+        
+        if (state) {
+          // Was checked? Leave it unchecked.
+          $(this).removeClass('checked');
+          checkbox.removeAttr('checked');
+        }
+        else {
+          $(this).addClass('checked');
+          checkbox.attr('checked','checked');
+        }
+        if ($.isFunction(settings.onClick)) {
+          settings.onClick.call();
+        }
+        checkbox.trigger('change');
+        return false;
+      });
+      
+      if ($(this).attr('checked')) {
+        btn.addClass('checked');
+      }
+      
+      $(this).after(btn).hide();
+    });
+    
+  };
+}(jQuery));

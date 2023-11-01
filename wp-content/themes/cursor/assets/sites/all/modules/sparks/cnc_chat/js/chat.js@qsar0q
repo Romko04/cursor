@@ -1,0 +1,22 @@
+var winRef;
+function OpenChatBox() {
+  try {
+    if(typeof(winRef) == 'undefined' || winRef.closed)
+    {
+      var strWindowFeatures = "height=500,width=490,resizable=no";
+      var url = 'https://helpline.homecaremedical.co.nz/HPAGambling/';
+      winRef = window.open('', 'chatWindow', strWindowFeatures);
+      if(winRef == null || winRef.document.location.href != url)
+      {
+        winRef = window.open(url, 'chatWindow', strWindowFeatures);
+      }
+    }
+    else
+    {
+      winRef.focus();
+    }
+  }
+
+  catch(ex) {
+  }
+}

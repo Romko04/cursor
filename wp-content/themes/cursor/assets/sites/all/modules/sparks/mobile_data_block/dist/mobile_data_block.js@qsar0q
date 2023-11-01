@@ -1,0 +1,52 @@
+"use strict";
+
+(function ($) {
+  /*
+  var isIE = $("html.no-smil").length ? true : false;
+      
+      console.log(isIE);
+  */
+  var block = $(".block--mobile-data-block");
+
+  if (block.length === 0) {
+    return;
+  }
+
+  Drupal.behaviors.mobile_data_block = {
+    attach: function attach(context, settings) {
+      var connection;
+
+      try {
+        connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+      } catch (e) {
+        connection = null;
+      } //const mobileDataBlockClosed = $.cookie('mobileDataBlockClosed'); 
+
+
+      if (!connection) {
+        $.ajax({
+          url: '/remoteAddr.json'
+        }).then(function (data) {
+          data.isUsingMobileData === true ? block.addClass('is-cellular') : null;
+        });
+      } else {
+        var _connection = connection,
+            type = _connection.type;
+
+        if (connection.type === 'cellular') {
+          block.addClass('is-cellular');
+        }
+      }
+
+      $("<button />", {
+        text: 'Close'
+      }).appendTo(block).on('click', function (evt) {
+        $.cookie('mobileDataBlockClosed', true, {
+          expires: 7,
+          path: '/'
+        });
+        block.addClass('has-been-closed');
+      });
+    }
+  };
+})(jQuery);
