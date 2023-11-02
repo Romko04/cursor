@@ -29,3 +29,16 @@ Theme Name: Cursor
 .node__heading{
     background-color: #fff;
 }
+.l-content{
+    background-color: #fff;
+}
+.current_page_item a{
+    color: #5b9e43;
+}
+.global-nav .menu a:hover, .global-nav .menu a:focus, .global-nav .menu a.active, .global-nav .menu .current_page_item a{
+    color: #5b9e43;
+}
+.l-footer .block--menu-block .menu a:focus, .l-footer .block--menu-block .menu a.active, .l-footer .block--menu-block .current_page_item a {
+    color: #edebe3;
+    border-bottom-color: #edebe3;
+}

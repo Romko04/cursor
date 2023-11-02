@@ -8,9 +8,11 @@ Template name: Home page
     <?php
     get_header();
     ?>
+    fddf
+
     <div class="l-main-wrap">
         <div class="l-main">
-            <div class="l-content" role="main">
+            <div style="background: none;" class="l-content" role="main">
                 <a href="index.html" id="main-content"></a>
                 <div class="block block--views c-slider block--views-slider-block" id="block-views-slider-block">
                     <div class="block__content">

@@ -1,6 +1,6 @@
 <?php
 /*
-Template name: Understand-gambling page
+Template name: help-support page
  */
 ?>
 
@@ -13,7 +13,7 @@ Template name: Understand-gambling page
             <nav id="block-menu-block-4" role="navigation" class="block block--menu-block secondary-nav block--menu-block-4">
                 <div class="menu-block-wrapper menu-block-4 menu-name-main-menu parent-mlid-0 menu-level-2">
                     <?php
-                    $taxonomy_name = 'understand-gambling-categories'; // Замініть 'taxonomy_name' на актуальну назву вашої таксономії.
+                    $taxonomy_name = 'help-support'; // Замініть 'taxonomy_name' на актуальну назву вашої таксономії.
                     $taxonomies = get_terms(array(
                         'taxonomy' => $taxonomy_name,
                         'hide_empty' => false
@@ -29,7 +29,6 @@ Template name: Understand-gambling page
                 </div>
             </nav>
         </div>
-        
         <?php the_content() ?>
     </div>
 </div>

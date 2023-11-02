@@ -1,6 +1,6 @@
 <?php
 /*
-Template name: Understand-gambling page
+Template name: How-much-is-too-much page
  */
 ?>
 
@@ -29,7 +29,6 @@ Template name: Understand-gambling page
                 </div>
             </nav>
         </div>
-        
         <?php the_content() ?>
     </div>
 </div>
