@@ -8,8 +8,6 @@ Template name: Home page
     <?php
     get_header();
     ?>
-    fddf
-
     <div class="l-main-wrap">
         <div class="l-main">
             <div style="background: none;" class="l-content" role="main">
@@ -17,9 +15,6 @@ Template name: Home page
                 <div class="block block--views c-slider block--views-slider-block" id="block-views-slider-block">
                     <div class="block__content">
                         <div class="view view-slider view-id-slider view-display-id-block view-dom-id-6404aaaeb37420597fb47c553d83b8f4">
-
-
-
                             <div class="view-content">
                                 <div class="flexslider optionset-homepage-banner" id="flexslider-1">
                                     <ul class="slides">

@@ -12,24 +12,27 @@ Template name: Understand-gambling page
         <div class="l-region l-region--content-before">
             <nav id="block-menu-block-4" role="navigation" class="block block--menu-block secondary-nav block--menu-block-4">
                 <div class="menu-block-wrapper menu-block-4 menu-name-main-menu parent-mlid-0 menu-level-2">
-                    <?php
-                    $taxonomy_name = 'understand-gambling'; // Замініть 'taxonomy_name' на актуальну назву вашої таксономії.
-                    $taxonomies = get_terms(array(
-                        'taxonomy' => $taxonomy_name,
-                        'hide_empty' => false
-                    ));
-                    ?>
-
                     <ul class="menu">
-                        <?php foreach ($taxonomies as $term) :
-                            echo '<li><a href="' . get_term_link($term) . '">' . $term->name . '</a></li>';
-                        ?>
-                        <?php endforeach; ?>
+                        <?php
+                        $posts = new WP_Query(array(
+                            'post_type' => 'understand-gambling',
+                            'posts_per_page' => -1,
+                        ));
+
+                        if ($posts->have_posts()) :
+
+                            while ($posts->have_posts()) : $posts->the_post(); ?>
+                                <li><a href="<?php the_permalink() ?>"><?php the_title() ?></a></li>
+                        <?php endwhile;
+
+                            wp_reset_postdata();
+                        endif; ?>
                     </ul>
                 </div>
             </nav>
         </div>
-        
+
+
         <?php the_content() ?>
     </div>
 </div>
