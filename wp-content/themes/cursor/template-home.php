@@ -17,12 +17,12 @@ Template name: Home page
                         <div class="view view-slider view-id-slider view-display-id-block view-dom-id-6404aaaeb37420597fb47c553d83b8f4">
                             <div class="view-content">
                                 <div class="flexslider optionset-homepage-banner" id="flexslider-1">
-                                    <ul class="slides">
+                                    <ul class="">
                                         <li>
                                             <div about="/node/279" class="ds-1col node node--homepage-slide view-mode-full c-banner c-banner--campaign c-banner--brown node--full node--homepage-slide--full clearfix" typeof="sioc:Item foaf:Document">
 
-
-                                                <div class="c-banner__wallpaper" style="background-image: url('<?php the_field('banner_image') ?>');">
+                                                <div class="field field-name-field-banner"><img alt="" height="353" src="<?php the_field('banner_image') ?>" typeof="foaf:Image" width="480"></div>
+                                                <div class="banner__wallpaper" style="background-image: url('<?php the_field('banner_image') ?>');">
                                                     <header class="c-banner__content">
                                                         <h2><?php the_field('banner_text') ?></h2>
                                                     </header>
