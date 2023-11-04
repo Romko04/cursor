@@ -24,7 +24,7 @@ Template name: Home page
 
                                                 <div class="c-banner__wallpaper" style="background-image: url('<?php the_field('banner_image') ?>');">
                                                     <header class="c-banner__content">
-                                                        <h2><?php the_field('banner_text') ?></h2><a href="<?php the_field('banner_link') ?>">Take the quiz</a>
+                                                        <h2><?php the_field('banner_text') ?></h2>
                                                     </header>
                                                 </div>
                                             </div>

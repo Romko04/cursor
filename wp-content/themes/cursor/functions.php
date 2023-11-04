@@ -268,3 +268,38 @@ function fix_svg_mime_type($data, $file, $filename, $mimes, $real_mime = '')
 
 	return $data;
 }
+function custom_submenu_class($classes, $args) {
+    if ($args->theme_location === 'menu-3') {
+        // Знаходимо індекс класу 'sub-menu' і замінюємо його на 'menu'
+        $sub_menu_index = array_search('sub-menu', $classes);
+        if ($sub_menu_index !== false) {
+            $classes[$sub_menu_index] = 'menu';
+        }
+    }
+    return $classes;
+}
+
+add_filter('nav_menu_submenu_css_class', 'custom_submenu_class', 10, 2);
+if( function_exists('acf_add_options_page') ) {
+
+    acf_add_options_page(array(
+        'page_title'    => 'Theme General Settings',
+        'menu_title'    => 'Theme Settings',
+        'menu_slug'     => 'theme-general-settings',
+        'capability'    => 'edit_posts',
+        'redirect'      => false
+    ));
+
+    acf_add_options_sub_page(array(
+        'page_title'    => 'Theme Header Settings',
+        'menu_title'    => 'Header',
+        'parent_slug'   => 'theme-general-settings',
+    ));
+
+    acf_add_options_sub_page(array(
+        'page_title'    => 'Theme Footer Settings',
+        'menu_title'    => 'Footer',
+        'parent_slug'   => 'theme-general-settings',
+    ));
+
+}
